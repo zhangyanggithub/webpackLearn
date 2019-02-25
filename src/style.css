@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'myFont';
+  src: url('./font/PingFangSC-Bold.ttf');
+  font-weight: 500;
+  font-style: normal;
+
+}
+.hello {
+  color: red;
+  font-family: 'myFont';
+}
