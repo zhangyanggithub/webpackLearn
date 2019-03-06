@@ -1,18 +1,19 @@
-import _ from 'lodash';
-import './style.css';
-import Icon from './img.jpg';
+  import _ from 'lodash';
+  import './style.css';
+  import printMe from './print.js';
 
-function component() {
-  let element = document.createElement('div');
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
+  function component() {
+    var element = document.createElement('div');
+    element.classList.add('red');
+    var btn = document.createElement('button');
 
-  let img = new Image();
-  img.src = Icon;
-  
-  element.appendChild(img);
-  return element;
-}
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
-const child = component();
-document.body.appendChild(child);
+    btn.innerHTML = 'Click me and check the console!';
+    btn.onclick = printMe;
+    element.appendChild(btn);
+
+    return element;
+  }
+
+  document.body.appendChild(component());
