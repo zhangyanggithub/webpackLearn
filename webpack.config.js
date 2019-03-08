@@ -10,7 +10,8 @@ module.exports = {
     app: "./src/index.js",
   },
   devServer: {
-    contentBase: "./dist"
+    contentBase: "./dist",
+    hot: true
   },
   output: {
     filename: "[name].bundle.js",
