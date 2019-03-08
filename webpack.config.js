@@ -8,22 +8,33 @@ module.exports = {
   mode: "development",
   entry: {
     app: "./src/index.js",
+    print: "./src/print.js",
   },
   devServer: {
-    contentBase: "./dist"
+    contentBase: "./dist",
+    port: 9000,
+    // hot: true,
+    hotOnly: true,
+    // open: true,
+    // inline: false,
+    headers: {
+      "X-Custom-Foo": "bar"
+    },
+    // https: true,
+    index: 'index.htm'
   },
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: '/'
+    // publicPath: '/'
   },
   devtool: "inline-source-map",
-  devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    hot: true,
-    compress: true,
-    port: 9000
-  },
+  // devServer: {
+  //   contentBase: path.join(__dirname, "dist"),
+  //   hot: true,
+  //   compress: true,
+  //   port: 9000
+  // },
   module: {
     rules: [{
         test: /\.css$/,
@@ -41,9 +52,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      template: "./template.html",
       inject: "body",
       title: "output management",
-      filename: "index.html",
+      filename: "index.htm",
       appMountId: "app"
     }),
     new CleanWebpackPlugin(["dist"]),
@@ -51,7 +63,7 @@ module.exports = {
       fileName: "manifest.json",
       basePath: "./public/"
     }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    // new webpack.NamedModulesPlugin(),
+    // new webpack.HotModuleReplacementPlugin()
   ]
 };

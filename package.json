@@ -9,7 +9,7 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "server": "node dev-server.js",
-    "start": "webpack-dev-server --open"
+    "webpack-dev-server": "webpack-dev-server --color"
   },
   "keywords": [],
   "author": "",
