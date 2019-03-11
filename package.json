@@ -7,8 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack --watch",
-    "server": "node dev-server.js",
+    "watch": "webpack --watch --open",
+    "dev-server": "node dev-server.js",
+    "server": "node server.js",
     "start": "webpack-dev-server --open"
   },
   "keywords": [],
@@ -26,9 +27,13 @@
     "webpack-cli": "^3.2.3",
     "webpack-dev-middleware": "^3.6.0",
     "webpack-dev-server": "^3.2.1",
+    "webpack-hot-middleware": "^2.24.3",
     "webpack-manifest-plugin": "^2.0.4"
   },
   "dependencies": {
     "lodash": "^4.17.11"
-  }
+  },
+  "sideEffects": [
+    "./src/math.js"
+  ]
 }
