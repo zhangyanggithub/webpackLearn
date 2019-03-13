@@ -8,9 +8,16 @@ const webpack = require('webpack');
 
 module.exports = {
   mode: "production",
-  entry: {
-    app: "./src/index.js",
+  entry: [
+    './src/index.js',
+    './src/another_module.js',
+    'webpack-hot-middleware/client.js',
     // math: "./src/math.js",
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
   },
   devServer: {
     contentBase: "./dist",
@@ -20,7 +27,7 @@ module.exports = {
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
-    // publicPath: '/'
+    publicPath: '/'
   },
   devtool: "inline-source-map",
   // devServer: {
@@ -58,6 +65,6 @@ module.exports = {
       basePath: "./public/"
     }),
     // new webpack.NamedModulesPlugin(),
-    // new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ]
 };
