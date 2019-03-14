@@ -3,21 +3,25 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-
 const webpack = require('webpack');
 
 module.exports = {
-  mode: "production",
-  entry: [
-    './src/index.js',
-    './src/another_module.js',
-    'webpack-hot-middleware/client.js',
+  mode: "development",
+  entry: {
+    index: './src/index.js',
+    another: './src/another_module.js'
     // math: "./src/math.js",
-  ],
+  },
   optimization: {
+    minimize: false,
     splitChunks: {
-      chunks: 'all'
-    }
+      chunks: 'all',
+      automaticNameDelimiter: '---',
+      minSize: 3000,
+      maxSize: 5000,
+
+    },
+    // namedModules: true
   },
   devServer: {
     contentBase: "./dist",
@@ -66,5 +70,16 @@ module.exports = {
     }),
     // new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
-  ]
+  ],
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //         commons: {
+  //           name: "commons",
+  //           chunks: "initial",
+  //           minChunks: 2
+  //         }
+  //       }
+  //   }
+  // },
 };
