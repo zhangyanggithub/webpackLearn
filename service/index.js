@@ -1,9 +1,9 @@
-const express = require('express');
+const Koa = require('koa');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const app = express();
+const app = new Koa();
 const config = require('./webpack.config.js');
 const compiler = webpack(config);
 

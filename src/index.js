@@ -1,22 +1,21 @@
-  import {
-    cube
-  } from './math.js';
-  import _ from 'lodash';
+// import {
+//   cube
+// } from './math.js';
+import _ from 'lodash';
   function component() {
-    var element = document.createElement('pre');
-    _.join(['Another', 'module', 'loaded!'], ' ');
-    element.innerHTML = [
-      'Hello webpack  22  33',
-      '5 cubed equals to ' + cube(5)
-    ].join('\n\n');
+    var element = document.createElement('div');
+    var button = document.createElement('button');
+    button.innerHTML = 'Click 11221 me and look at the console!';
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.appendChild(button);
+    button.onclick = e => import( /* webpackChunkName: "print" */ './print').then(module => {
+      var print = module.default;
+      print();
+    });
 
+
+    // const _ = await import( /* webpackChunkName: "lodash" */ 'lodash');
     return element;
   }
-
-  let element = component();
-  document.body.innerHTML = null;
-  document.body.appendChild(element);
-
-  if (module.hot) {
-    module.hot.accept();
-  }
+  const ele = component();
+  document.body.appendChild(ele);
