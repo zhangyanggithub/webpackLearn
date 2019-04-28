@@ -5,7 +5,17 @@ const config = require('../webpack.config.js');
 const options = {
   contentBase: './dist',
   hot: true,
-  host: 'localhost'
+  host: 'localhost',
+  proxy: {
+    '/api': {
+      target: 'https://baike.baidu.com/', // ucActiv/ity/api/thriftApi/base/CityInfoThriftService/getCityPartnerInfo.ajax
+      pathRewrite: {
+        '/api': 'item/%E8%8A%B1/9980053?fr=aladdin'
+      },
+      changeOrigin: true
+    },
+    '/': 'http://localhost:3000'
+  }
 };
 
 webpackDevServer.addDevServerEntrypoints(config, options);

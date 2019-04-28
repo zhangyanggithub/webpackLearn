@@ -2,14 +2,18 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackManifestPlugin = require('webpack-manifest-plugin');
 const webpack = require('webpack');
+const {
+  VueLoaderPlugin
+} = require('vue-loader');
 
 module.exports = {
   mode: "development",
   entry: {
     index: './src/index.js'
-    // index: ["webpack-hot-middleware/client?noInfo=true&reload=true", './src/index.js']
-    // another: './src/another_module.js'
-    // math: "./src/math.js",
+  },
+  output: {
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist")
   },
   optimization: {
     minimize: false,
@@ -17,11 +21,6 @@ module.exports = {
       chunks: 'all',
     },
     namedModules: true
-  },
-  output: {
-    filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
-    // publicPath: '/'
   },
   devtool: "inline-source-map",
   devServer: {
@@ -46,15 +45,19 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: ["vue-loader"]
+        use: ["vue-loader"],
+        exclude: /node_modules/
       }
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/index.html'),
+      // chunks: ['vendors', 'index'],
       inject: "body",
       title: "output management",
-      filename: "index.html",
+      filename: "indexNew.html",
       appMountId: "app"
     }),
     new WebpackManifestPlugin({
