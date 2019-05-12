@@ -7,14 +7,14 @@ const options = {
   hot: true,
   host: 'localhost',
   proxy: {
-    '/api': {
+    '/apiMock': {
       target: 'https://baike.baidu.com/', // ucActiv/ity/api/thriftApi/base/CityInfoThriftService/getCityPartnerInfo.ajax
       pathRewrite: {
-        '/api': 'item/%E8%8A%B1/9980053?fr=aladdin'
+        '/apiMock': 'item/%E8%8A%B1/9980053?fr=aladdin'
       },
       changeOrigin: true
     },
-    '/': 'http://localhost:3000'
+    '/page': 'http://localhost:3000'
   }
 };
 

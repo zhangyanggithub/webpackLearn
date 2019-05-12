@@ -1,0 +1,6 @@
+{
+  "./public/test1.js": "test1.bundle.js",
+  "./public/test2.js": "test2.bundle.js",
+  "./public/vendors~test1~test2.js": "vendors~test1~test2.bundle.js",
+  "./public/page.html": "page.html"
+}

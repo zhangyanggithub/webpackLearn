@@ -6,11 +6,15 @@ const {
   VueLoaderPlugin
 } = require('vue-loader');
 
+const entries = {};
+const fileNames = require('./entry/entries.js');
+Object.keys(fileNames).forEach(file => {
+  entries[file] = `./entry/allEntries/${file}.js`;
+});
+
 module.exports = {
   mode: "development",
-  entry: {
-    index: './src/index.js'
-  },
+  entry: "index.js",
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist")
@@ -54,10 +58,9 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './src/index.html'),
-      // chunks: ['vendors', 'index'],
       inject: "body",
       title: "output management",
-      filename: "indexNew.html",
+      filename: "page.html",
       appMountId: "app"
     }),
     new WebpackManifestPlugin({
