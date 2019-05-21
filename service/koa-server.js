@@ -4,6 +4,7 @@ const Router = require('koa-router');
 const serve = require('koa-static');
 
 const htmlRender = require('./htmlRender');
+const apiServer = require('./api');
 
 // app.use(async (ctx, next) => {
 //   await next();
@@ -12,6 +13,7 @@ const htmlRender = require('./htmlRender');
 // });
 
 app.use(htmlRender());
+app.use(apiServer());
 
 const router = new Router();
 

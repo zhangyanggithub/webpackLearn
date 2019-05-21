@@ -6,15 +6,11 @@ const {
   VueLoaderPlugin
 } = require('vue-loader');
 
-const entries = {};
-const fileNames = require('./entry/entries.js');
-Object.keys(fileNames).forEach(file => {
-  entries[file] = `./entry/allEntries/${file}.js`;
-});
-
 module.exports = {
   mode: "development",
-  entry: "index.js",
+  entry: {
+    index: "./src/index.js",
+  },
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist")
@@ -26,13 +22,26 @@ module.exports = {
     },
     namedModules: true
   },
+  // modules: ["node_modules"],
+  // alias: {
+  //   Templates: path.resolve(__dirname, 'src/templates/')
+  // },
   devtool: "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     hot: true,
     hotOnly: true,
-    compress: true,
-    port: 9000
+    compress: false,
+    proxy: {
+      '/apiMock': {
+        target: 'https://baike.baidu.com/', // ucActiv/ity/api/thriftApi/base/CityInfoThriftService/getCityPartnerInfo.ajax
+        pathRewrite: {
+          '/apiMock': 'item/%E8%8A%B1/9980053?fr=aladdin'
+        },
+        changeOrigin: true
+      },
+      '/apiServer': 'http://localhost:3001'
+    },
   },
   module: {
     rules: [{

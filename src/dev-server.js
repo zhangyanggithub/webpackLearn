@@ -1,27 +1,36 @@
-const webpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 
-const config = require('../webpack.config.js');
-const options = {
-  contentBase: './dist',
-  hot: true,
-  host: 'localhost',
-  proxy: {
-    '/apiMock': {
-      target: 'https://baike.baidu.com/', // ucActiv/ity/api/thriftApi/base/CityInfoThriftService/getCityPartnerInfo.ajax
-      pathRewrite: {
-        '/apiMock': 'item/%E8%8A%B1/9980053?fr=aladdin'
-      },
-      changeOrigin: true
-    },
-    '/page': 'http://localhost:3000'
+const Koa = require('koa');
+const app = new Koa();
+
+const webpackConfig = require('../webpack.config.js');
+const koaWebpackMiddleware = require('koa-webpack-middleware');
+
+const {
+  devMiddleware,
+  hotMiddleware
+} = koaWebpackMiddleware;
+
+const compiler = webpack(webpackConfig);
+
+const devMiddlewareInstance = devMiddleware(compiler, {
+  publicPath: '/__webpack_hmr',
+  compress: false,
+  stats: {
+    colors: true
   }
-};
+});
 
-webpackDevServer.addDevServerEntrypoints(config, options);
-const compiler = webpack(config);
-const server = new webpackDevServer(compiler, options);
+const htmlRender = require('../service/htmlRender');
 
-server.listen(5000, 'localhost', () => {
+app.use(htmlRender());
+app.use(devMiddlewareInstance);
+app.use(hotMiddleware(compiler, {
+  // log: console.log,
+  // path: '/__webpack_hmr',
+  // heartbeat: 10 * 1000
+}));
+
+app.listen(5000, 'localhost', () => {
   console.log('dev server listening on port 5000');
 });
