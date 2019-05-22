@@ -1,4 +1,0 @@
-{
-  "./public/test.js": "/__webpack_hmr/test.bundle.js",
-  "./public/vendors~test.js": "/__webpack_hmr/vendors~test.bundle.js"
-}
