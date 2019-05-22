@@ -2,13 +2,13 @@ const webpack = require('webpack');
 
 const Koa = require('koa');
 const app = new Koa();
+const proxy = require('koa-proxy');
 
 const webpackConfig = require('../webpack.config.js');
 const koaWebpackMiddleware = require('koa-webpack-middleware');
 
 const {
   devMiddleware,
-  hotMiddleware
 } = koaWebpackMiddleware;
 
 const compiler = webpack(webpackConfig);
@@ -21,14 +21,13 @@ const devMiddlewareInstance = devMiddleware(compiler, {
   }
 });
 
-const htmlRender = require('../service/htmlRender');
+const dynamicEntry = require('../service/dynamicEntry');
 
-app.use(htmlRender());
+app.use(dynamicEntry(compiler, devMiddlewareInstance));
 app.use(devMiddlewareInstance);
-app.use(hotMiddleware(compiler, {
-  // log: console.log,
-  // path: '/__webpack_hmr',
-  // heartbeat: 10 * 1000
+
+app.use(proxy({
+  host: 'http://localhost:3000'
 }));
 
 app.listen(5000, 'localhost', () => {

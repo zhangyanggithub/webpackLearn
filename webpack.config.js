@@ -5,15 +5,23 @@ const webpack = require('webpack');
 const {
   VueLoaderPlugin
 } = require('vue-loader');
+const glob = require('glob');
+
+const entries = glob.sync(path.resolve(__dirname, '/entry/allEntries/**')).reduce((obj, file) => {
+  const fileName = file.replace('.js', '');
+  obj[fileName] = fileName;
+  return obj;
+}, {});
+
+entries['test'] = './src/index.js';
 
 module.exports = {
   mode: "development",
-  entry: {
-    index: "./src/index.js",
-  },
+  entry: entries,
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    publicPath: '/__webpack_hmr/'
   },
   optimization: {
     minimize: false,
@@ -22,10 +30,6 @@ module.exports = {
     },
     namedModules: true
   },
-  // modules: ["node_modules"],
-  // alias: {
-  //   Templates: path.resolve(__dirname, 'src/templates/')
-  // },
   devtool: "inline-source-map",
   devServer: {
     contentBase: path.join(__dirname, "dist"),
@@ -65,17 +69,10 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/index.html'),
-      inject: "body",
-      title: "output management",
-      filename: "page.html",
-      appMountId: "app"
-    }),
     new WebpackManifestPlugin({
       fileName: "manifest.json",
       basePath: "./public/"
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ]
 };

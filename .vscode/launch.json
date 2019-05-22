@@ -9,6 +9,12 @@
       "request": "launch",
       "name": "node-dev",
       "program": "${workspaceFolder}/service/koa-server.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "dev",
+      "program": "${workspaceFolder}/src/dev-server.js"
     }
   ]
 }
