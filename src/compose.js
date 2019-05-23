@@ -25,7 +25,7 @@ function compose(middleware, next) {
 
 async function f1 (ctx, next) {
   console.log('f1');
-  // await next();
+  await next();
   console.log('f11');
 }
 async function f2 (ctx, next) {

@@ -5,11 +5,7 @@ const app = new Koa();
 const proxy = require('koa-proxy');
 
 const webpackConfig = require('../webpack.config.js');
-const koaWebpackMiddleware = require('koa-webpack-middleware');
-
-const {
-  devMiddleware,
-} = koaWebpackMiddleware;
+const { devMiddleware } = require('koa-webpack-middleware');
 
 const compiler = webpack(webpackConfig);
 
@@ -21,8 +17,10 @@ const devMiddlewareInstance = devMiddleware(compiler, {
   }
 });
 
-const dynamicEntry = require('./dynamicEntry');
+const writeEntry = require('./middleWares/writeEntry');
+const dynamicEntry = require('./middleWares/dynamicEntry');
 
+app.use(writeEntry());
 app.use(dynamicEntry(compiler, devMiddlewareInstance));
 app.use(devMiddlewareInstance);
 

@@ -1,19 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const request = require('request');
-
-function rentryTemplate (file) {
-  return `import Vue from 'vue';
-import App from '../../src/page/${file}.vue';
-
-new Vue({
-  el: '#app',
-  render: h => {
-    console.log('render');
-    return h(App)
-  },
-});`
-}
 
 function htmlTemplate (scripts) {
   return `<!DOCTYPE html>
@@ -26,6 +12,7 @@ function htmlTemplate (scripts) {
 </head>
 <body>
 this is a new page
+<div id="app"></div>
 ${scripts}
 ${scripts.map(f => '<script crossorigin="anonymous" type="text/javascript" src="' + f + '"></script>').join('\n\r')}
 </body>
@@ -34,19 +21,9 @@ ${scripts.map(f => '<script crossorigin="anonymous" type="text/javascript" src="
 
 module.exports = options => async (ctx, next) => {
   const url = ctx.path;
-  if (!url.endsWith('.html')) await next();
+  if (!url.endsWith('.html')) return await next();
   const entryFileName = url.replace('.html', '').replace('/page/', '');
-  const writePath = path.resolve(__dirname, '../entry/allEntries/');
 
-  const filePath = `${writePath}/${entryFileName}.js`;
-
-  if (!fs.existsSync(filePath)) {
-    fs.writeFileSync(filePath, rentryTemplate(entryFileName), (err) => {
-      if (err) {
-        console.error(err);
-      }
-    });
-  }
   const scripts = [
     `/__webpack_hmr/${entryFileName}.bundle.js`,
     `/__webpack_hmr/vendors~${entryFileName}.bundle.js`,
@@ -57,5 +34,5 @@ module.exports = options => async (ctx, next) => {
   ctx.set('Expires', '0');
   ctx.body = htmlTemplate(scripts);
 
-  await next();
+  return await next();
 }

@@ -1,7 +1,7 @@
 const Koa = require('koa');
 const app = new Koa();
 
-const htmlRender = require('./htmlRender');
+const htmlRender = require('./middleWares/htmlRender');
 app.use(htmlRender());
 
 app.listen(3000, () => {

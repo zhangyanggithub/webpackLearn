@@ -14,7 +14,7 @@
       "type": "node",
       "request": "launch",
       "name": "dev",
-      "program": "${workspaceFolder}/src/dev-server.js"
+      "program": "${workspaceFolder}/service/dev-server.js"
     }
   ]
 }

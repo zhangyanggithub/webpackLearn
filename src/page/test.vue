@@ -23,6 +23,9 @@ export default {
       text: null
     }
   },
+  created() {
+    alert(1234);
+  },
   methods: {
     fetchData() {
       axios.post('/apiServer').then(res => {
