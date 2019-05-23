@@ -4,7 +4,7 @@ const compliedMaps = {
   index: true,
 };
 
-const rootPath = path.resolve(__dirname, '../entry/allEntries/');
+const rootPath = path.resolve(__dirname, '../../entry/allEntries/');
 
 module.exports = (compiler, devMiddlewareInstance) => {
   return async (ctx, next) => {
