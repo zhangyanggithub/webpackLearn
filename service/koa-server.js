@@ -1,6 +1,7 @@
 const Koa = require('koa');
 const app = new Koa();
 
+// 返回HTML页面
 const htmlRender = require('./middleWares/htmlRender');
 app.use(htmlRender());
 

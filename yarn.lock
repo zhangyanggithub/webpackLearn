@@ -1497,6 +1497,11 @@ ee-first@1.1.1:
   resolved "http://r.npm.sankuai.com/ee-first/download/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
+ejs@^2.6.1:
+  version "2.6.1"
+  resolved "http://r.npm.sankuai.com/ejs/download/ejs-2.6.1.tgz#498ec0d495655abc6f23cd61868d926464071aa0"
+  integrity sha1-SY7A1JVlWrxvI81hho2SZGQHGqA=
+
 element-ui@^2.8.2:
   version "2.8.2"
   resolved "http://r.npm.sankuai.com/element-ui/download/element-ui-2.8.2.tgz#21a7a4cb92616b0f8b75d4d4e637d3a1cd8c09de"
@@ -5271,6 +5276,11 @@ tar@^4:
     mkdirp "^0.5.0"
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
+
+template_js@^0.7.1-1:
+  version "0.7.1-1"
+  resolved "http://r.npm.sankuai.com/template_js/download/template_js-0.7.1-1.tgz#909d17af0bb40f99a9977bc52fb2d305a70f2130"
+  integrity sha1-kJ0Xrwu0D5mpl3vFL7LTBacPITA=
 
 terser-webpack-plugin@^1.1.0:
   version "1.2.3"
