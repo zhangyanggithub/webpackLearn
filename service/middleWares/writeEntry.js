@@ -13,7 +13,11 @@ new Vue({
     console.log('render');
     return h(App)
   },
-});`
+});
+// if (module.hot) {
+//   module.hot.accept();
+// }
+`
 }
 
 module.exports = options => async (ctx, next) => {
@@ -24,12 +28,12 @@ module.exports = options => async (ctx, next) => {
 
   const filePath = `${writePath}/${entryFileName}.js`;
 
-  if (!fs.existsSync(filePath)) {
+  // if (!fs.existsSync(filePath)) {
     fs.writeFileSync(filePath, entryTemplate(entryFileName), (err) => {
       if (err) {
         console.error(err);
       }
     });
-  }
+  // }
   return await next();
 }

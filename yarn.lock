@@ -3184,6 +3184,13 @@ koa-static@^5.0.0:
     debug "^3.1.0"
     koa-send "^5.0.0"
 
+koa-webpack-hot-middleware@^1.0.3:
+  version "1.0.3"
+  resolved "http://r.npm.sankuai.com/koa-webpack-hot-middleware/download/koa-webpack-hot-middleware-1.0.3.tgz#df6aafbf2d77153101e37e6a4ae70235b466f8c0"
+  integrity sha1-32qvvy13FTEB435qSucCNbRm+MA=
+  dependencies:
+    webpack-hot-middleware "2.x"
+
 koa-webpack-middleware@^1.0.7:
   version "1.0.7"
   resolved "http://r.npm.sankuai.com/koa-webpack-middleware/download/koa-webpack-middleware-1.0.7.tgz#9d1cbf4455ae989614eef37e304978b024067f11"
@@ -5841,7 +5848,7 @@ webpack-hot-middleware@2.18.2:
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
 
-webpack-hot-middleware@^2.19.1:
+webpack-hot-middleware@2.x, webpack-hot-middleware@^2.19.1:
   version "2.25.0"
   resolved "http://r.npm.sankuai.com/webpack-hot-middleware/download/webpack-hot-middleware-2.25.0.tgz#4528a0a63ec37f8f8ef565cf9e534d57d09fe706"
   integrity sha1-RSigpj7Df4+O9WXPnlNNV9Cf5wY=

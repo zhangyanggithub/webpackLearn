@@ -1,6 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-
 function htmlTemplate (scripts) {
   return `<!DOCTYPE html>
 <html>
@@ -26,7 +23,7 @@ module.exports = options => async (ctx, next) => {
 
   const scripts = [
     `/__webpack_hmr/${entryFileName}.bundle.js`,
-    `/__webpack_hmr/vendors~${entryFileName}.bundle.js`,
+    `/__webpack_hmr/vendor.bundle.js`,
   ];
 
   ctx.set('Content-Type', "text/html");

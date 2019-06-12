@@ -21,7 +21,6 @@ module.exports = (compiler, devMiddlewareInstance) => {
     );
 
     compiler.apply(newEntry);
-    // newEntry.apply();
     devMiddlewareInstance.invalidate();
     compliedMaps[entryFileName] = true;
     return await next();

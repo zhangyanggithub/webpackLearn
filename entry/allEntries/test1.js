@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Element from 'element-ui';
-import App from '../../src/page/test.vue';
+import App from '../../src/page/test1.vue';
 
 Vue.use(Element);
 new Vue({

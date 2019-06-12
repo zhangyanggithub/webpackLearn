@@ -14,12 +14,13 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   components: { },
   data() {
     return {
-      text: null
+      text: 55
     }
   },
   created() {

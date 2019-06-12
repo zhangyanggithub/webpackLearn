@@ -15,6 +15,12 @@ const entries = glob.sync(path.resolve(__dirname, '/entry/allEntries/**')).reduc
 
 entries['test'] = './src/index.js';
 
+for (let p in entries) {
+  entries[p] = [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+  ].concat(entries[p]);
+}
+
 module.exports = {
   mode: "development",
   entry: entries,
@@ -24,29 +30,28 @@ module.exports = {
     publicPath: '/__webpack_hmr',
   },
   optimization: {
-    minimize: false,
     splitChunks: {
       chunks: 'all',
+      name: 'vendor'
     },
-    namedModules: true
   },
   devtool: "inline-source-map",
-  devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    hot: true,
-    hotOnly: true,
-    compress: false,
-    proxy: {
-      '/apiMock': {
-        target: 'https://baike.baidu.com/', // ucActiv/ity/api/thriftApi/base/CityInfoThriftService/getCityPartnerInfo.ajax
-        pathRewrite: {
-          '/apiMock': 'item/%E8%8A%B1/9980053?fr=aladdin'
-        },
-        changeOrigin: true
-      },
-      '/apiServer': 'http://localhost:3001'
-    },
-  },
+  // devServer: {
+    //   contentBase: path.join(__dirname, "dist"),
+    //   hot: true,
+    //   hotOnly: true,
+    //   compress: false,
+    //   proxy: {
+    //     '/apiMock': {
+    //       target: 'https://baike.baidu.com/', // ucActiv/ity/api/thriftApi/base/CityInfoThriftService/getCityPartnerInfo.ajax
+    //       pathRewrite: {
+    //         '/apiMock': 'item/%E8%8A%B1/9980053?fr=aladdin'
+    //       },
+    //       changeOrigin: true
+    //     },
+    //     '/apiServer': 'http://localhost:3001'
+    //   },
+  // },
   module: {
     rules: [{
         test: /\.css$/,
@@ -73,6 +78,8 @@ module.exports = {
       fileName: "manifest.json",
       basePath: "./public/"
     }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 };
