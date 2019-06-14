@@ -17,7 +17,7 @@ entries['test'] = './src/index.js';
 
 for (let p in entries) {
   entries[p] = [
-    'webpack-hot-middleware/client?noInfo=true&reload=true',
+    'webpack-hot-middleware/client',
   ].concat(entries[p]);
 }
 

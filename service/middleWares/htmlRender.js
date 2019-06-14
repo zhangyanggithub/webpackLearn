@@ -17,9 +17,12 @@ ${scripts.map(f => '<script crossorigin="anonymous" type="text/javascript" src="
 }
 
 module.exports = options => async (ctx, next) => {
-  const url = ctx.path;
-  if (!url.endsWith('.html')) return await next();
-  const entryFileName = url.replace('.html', '').replace('/page/', '');
+  const path = ctx.path;
+  if (!path.endsWith('.html')) return await next();
+
+  console.log('path:', path);
+
+  const entryFileName = path.replace('.html', '').replace('/page/', '');
 
   const scripts = [
     `/__webpack_hmr/${entryFileName}.bundle.js`,

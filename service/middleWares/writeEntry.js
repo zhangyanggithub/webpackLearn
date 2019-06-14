@@ -21,9 +21,9 @@ if (module.hot) {
 }
 
 module.exports = options => async (ctx, next) => {
-  const url = ctx.path;
-  if (!url.endsWith('.html')) return await next();
-  const entryFileName = url.replace('.html', '').replace('/page/', '');
+  const reqPath = ctx.path;
+  if (!reqPath.endsWith('.html')) return await next();
+  const entryFileName = reqPath.replace('.html', '').replace('/page/', '');
   const writePath = path.resolve(__dirname, '../../entry/allEntries/');
 
   const filePath = `${writePath}/${entryFileName}.js`;

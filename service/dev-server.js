@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const Koa = require('koa');
 const app = new Koa();
 const proxy = require('koa-proxy');
-const koaConvert = require('koa-convert')
 
 const webpackConfig = require('../webpack.config.js');
 
@@ -39,7 +38,7 @@ app.use(devMiddlewareInstance);
 const hotMiddlewareInstance = hotMiddleware(compiler, {
   path: webpackConfig.output.publicPath,
 });
-app.use(hotMiddlewareInstance);
+// app.use(hotMiddlewareInstance);
 
 
 app.use(proxy({

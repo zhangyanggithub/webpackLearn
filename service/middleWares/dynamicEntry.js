@@ -6,10 +6,10 @@ const rootPath = path.resolve(__dirname, '../../entry/allEntries/');
 
 module.exports = (compiler, devMiddlewareInstance) => {
   return async (ctx, next) => {
-    const url = ctx.path;
-    if (!url.endsWith('.html')) return await next();
+    const reqPath = ctx.path;
+    if (!reqPath.endsWith('.html')) return await next();
 
-    const entryFileName = url.replace('.html', '').replace('/page/', '');
+    const entryFileName = reqPath.replace('.html', '').replace('/page/', '');
     if (compliedMaps[entryFileName]) return await next();
     ctx.entryFileName = entryFileName;
 
