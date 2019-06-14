@@ -62,8 +62,8 @@ module.exports = {
       fileName: "manifest.json",
       basePath: "./public/"
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    // new webpack.NoEmitOnErrorsPlugin()
   ]
 };
