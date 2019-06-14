@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Element from 'element-ui';
-import App from '../../src/page/test1.vue';
+import App from '../../src/page/test2.vue';
 
 Vue.use(Element);
 new Vue({
@@ -10,6 +10,6 @@ new Vue({
     return h(App)
   },
 });
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }

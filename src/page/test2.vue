@@ -1,6 +1,6 @@
 <template>
   <div>
-    this is first second page !
+    this is second page !
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   data() {
     return {
 
-  }
+    }
  },
 }
 </script>

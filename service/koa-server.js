@@ -3,6 +3,9 @@ const app = new Koa();
 
 // 返回HTML页面
 const htmlRender = require('./middleWares/htmlRender');
+const homePage = require('./middleWares/homePage');
+
+app.use(homePage());
 app.use(htmlRender());
 
 app.listen(3000, () => {

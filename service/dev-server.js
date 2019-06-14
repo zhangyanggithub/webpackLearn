@@ -6,7 +6,7 @@ const proxy = require('koa-proxy');
 const convert = require('koa-convert')
 
 const webpackConfig = require('../webpack.config.js');
-// const hotMiddleware = require('koa-webpack-hot-middleware');
+// const hotMiddleware = require('webpack-hot-middleware');
 
 // devMiddleware即webpack-dev-middleware
 const {
@@ -33,8 +33,13 @@ const dynamicEntry = require('./middleWares/dynamicEntry');
 
 app.use(writeEntry());
 app.use(dynamicEntry(compiler, devMiddlewareInstance));
+
 app.use(devMiddlewareInstance);
-// app.use((hotMiddleware(compiler)));
+
+app.use(hotMiddleware(compiler, {
+  path: webpackConfig.output.publicPath,
+}));
+
 
 app.use(proxy({
   host: 'http://localhost:3000'

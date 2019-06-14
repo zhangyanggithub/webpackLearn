@@ -24,7 +24,7 @@ export default {
     }
   },
   created() {
-    alert(1234);
+    // alert(1234);
   },
   methods: {
     fetchData() {

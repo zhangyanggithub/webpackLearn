@@ -17,7 +17,7 @@ entries['test'] = './src/index.js';
 
 for (let p in entries) {
   entries[p] = [
-    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+    'webpack-hot-middleware/client?noInfo=true&reload=true',
   ].concat(entries[p]);
 }
 
@@ -36,22 +36,6 @@ module.exports = {
     },
   },
   devtool: "inline-source-map",
-  // devServer: {
-    //   contentBase: path.join(__dirname, "dist"),
-    //   hot: true,
-    //   hotOnly: true,
-    //   compress: false,
-    //   proxy: {
-    //     '/apiMock': {
-    //       target: 'https://baike.baidu.com/', // ucActiv/ity/api/thriftApi/base/CityInfoThriftService/getCityPartnerInfo.ajax
-    //       pathRewrite: {
-    //         '/apiMock': 'item/%E8%8A%B1/9980053?fr=aladdin'
-    //       },
-    //       changeOrigin: true
-    //     },
-    //     '/apiServer': 'http://localhost:3001'
-    //   },
-  // },
   module: {
     rules: [{
         test: /\.css$/,

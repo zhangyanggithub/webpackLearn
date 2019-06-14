@@ -1,8 +1,6 @@
 const SingleEntryPlugin = require('webpack/lib/SingleEntryPlugin');
 const path = require('path');
-const compliedMaps = {
-  index: true,
-};
+const compliedMaps = {};
 
 const rootPath = path.resolve(__dirname, '../../entry/allEntries/');
 
@@ -12,6 +10,7 @@ module.exports = (compiler, devMiddlewareInstance) => {
     if (!url.endsWith('.html')) return await next();
 
     const entryFileName = url.replace('.html', '').replace('/page/', '');
+    if (compliedMaps[entryFileName]) return await next();
     ctx.entryFileName = entryFileName;
 
     let newEntry = new SingleEntryPlugin(
